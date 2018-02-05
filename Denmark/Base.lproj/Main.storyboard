@@ -1029,7 +1029,7 @@
                                                                 <rect key="frame" x="85" y="19.333333333333314" width="282" height="17"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                         <color key="value" red="0.3294117647" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1394,8 +1394,8 @@
                                                             <constraint firstAttribute="width" constant="1" id="SBQ-lO-PbK"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CPR" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cc6-Qm-3F5" customClass="LDTextField" customModule="Denmark" customModuleProvider="target">
-                                                        <rect key="frame" x="85" y="15.333333333333371" width="282" height="30"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CPR" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cc6-Qm-3F5" customClass="LDTextField" customModule="Denmark" customModuleProvider="target">
+                                                        <rect key="frame" x="85" y="22" width="282" height="17"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -1408,12 +1408,6 @@
                                                             <outlet property="delegate" destination="tq5-gJ-p0N" id="VwI-VZ-qcD"/>
                                                         </connections>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5U-v7-mSv">
-                                                        <rect key="frame" x="85" y="15.333333333333371" width="282" height="30"/>
-                                                        <connections>
-                                                            <action selector="btnAddressAct:" destination="tq5-gJ-p0N" eventType="touchUpInside" id="1bp-lD-mhM"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -1422,15 +1416,11 @@
                                                     <constraint firstItem="Aiq-Ru-3CS" firstAttribute="leading" secondItem="G0p-Gv-pXL" secondAttribute="leading" constant="66" id="93S-bZ-BMT"/>
                                                     <constraint firstItem="8ut-RB-xnC" firstAttribute="leading" secondItem="G0p-Gv-pXL" secondAttribute="leading" id="A19-bq-VOJ"/>
                                                     <constraint firstItem="Aiq-Ru-3CS" firstAttribute="height" secondItem="G0p-Gv-pXL" secondAttribute="height" multiplier="16:50" id="D8Z-3s-40i"/>
-                                                    <constraint firstItem="n5U-v7-mSv" firstAttribute="width" secondItem="Cc6-Qm-3F5" secondAttribute="width" id="Dbk-Nt-bgc"/>
                                                     <constraint firstAttribute="trailing" secondItem="8ut-RB-xnC" secondAttribute="trailing" id="E0l-ay-ccD"/>
-                                                    <constraint firstItem="n5U-v7-mSv" firstAttribute="height" secondItem="Cc6-Qm-3F5" secondAttribute="height" id="FXC-Uy-leO"/>
-                                                    <constraint firstItem="n5U-v7-mSv" firstAttribute="centerX" secondItem="Cc6-Qm-3F5" secondAttribute="centerX" id="HZf-ct-66u"/>
                                                     <constraint firstItem="WPc-Kx-abC" firstAttribute="centerY" secondItem="G0p-Gv-pXL" secondAttribute="centerY" constant="-5" id="L1L-by-Aw6"/>
                                                     <constraint firstItem="Aiq-Ru-3CS" firstAttribute="centerY" secondItem="WPc-Kx-abC" secondAttribute="centerY" id="YYS-9d-lSR"/>
                                                     <constraint firstItem="Cc6-Qm-3F5" firstAttribute="centerY" secondItem="Aiq-Ru-3CS" secondAttribute="centerY" id="dtd-WQ-Xr6"/>
                                                     <constraint firstItem="WPc-Kx-abC" firstAttribute="leading" secondItem="G0p-Gv-pXL" secondAttribute="leading" constant="30" id="fkD-Ph-erK"/>
-                                                    <constraint firstItem="n5U-v7-mSv" firstAttribute="centerY" secondItem="Cc6-Qm-3F5" secondAttribute="centerY" id="ioW-FF-WMr"/>
                                                     <constraint firstItem="Cc6-Qm-3F5" firstAttribute="leading" secondItem="Aiq-Ru-3CS" secondAttribute="trailing" constant="18" id="lPR-X6-XaS"/>
                                                     <constraint firstItem="8ut-RB-xnC" firstAttribute="top" secondItem="G0p-Gv-pXL" secondAttribute="top" id="nMQ-gh-2S3"/>
                                                     <constraint firstItem="8ut-RB-xnC" firstAttribute="height" secondItem="G0p-Gv-pXL" secondAttribute="height" id="sfg-AG-n3Z"/>
@@ -1496,7 +1486,7 @@
                                                         <rect key="frame" x="85" y="21.333333333333258" width="282" height="17"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                 <color key="value" red="0.3294117647" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1547,7 +1537,7 @@
                                                         <rect key="frame" x="85" y="21.666666666666629" width="282" height="17"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                 <color key="value" red="0.3294117647" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1648,7 +1638,7 @@
                                                         <rect key="frame" x="85" y="22.333333333333258" width="282" height="17"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                 <color key="value" red="0.3294117647" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1698,7 +1688,7 @@
                                                         <rect key="frame" x="85" y="21.666666666666742" width="282" height="17"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                 <color key="value" red="0.3294117647" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

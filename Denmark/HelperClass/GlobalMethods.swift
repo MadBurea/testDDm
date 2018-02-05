@@ -10,11 +10,14 @@ import UIKit
 import Alamofire
 import SystemConfiguration
 import SVProgressHUD
+import AlamofireJsonToObjects
 
 enum APIPath : String
 {
     case login = "login"
-    
+    case registration = "registration"
+    case getjobcategory = "getjobcategory"
+
 }
 
 class GlobalMethods: NSObject {
@@ -33,7 +36,6 @@ class GlobalMethods: NSObject {
         {
             
             let strAPIPath = GlobalMethods.WEB_SERVICE_BASE_URL + apiUrl
-            
             
             print(strAPIPath)
             print(parameter)
@@ -58,16 +60,56 @@ class GlobalMethods: NSObject {
                 }
                 else
                 {
-                    self.alertNoInternetConnection()
+                    showAlert(popUpMessage.someWrong.rawValue)
                 }
             }
         }
         else
         {
-           self.alertNoInternetConnection()
+            showAlert(popUpMessage.someWrong.rawValue)
         }
     }
     
+    
+    
+    func GETcallWebService(apiUrl : String,parameter: AnyObject!,  completionHandler:@escaping (AnyObject, NSError?)->()) ->()
+    {
+        if currentReachabilityStatus != .notReachable
+        {
+            
+            let strAPIPath = GlobalMethods.WEB_SERVICE_BASE_URL + apiUrl
+            
+            
+            print(strAPIPath)
+            print(parameter)
+            request = Alamofire.request(strAPIPath, method: .get, parameters: parameter as? Parameters, encoding: JSONEncoding.default, headers: nil).responseJSON { (response:DataResponse<Any>) in
+                
+                if self.currentReachabilityStatus != .notReachable
+                {
+                    if response.result.value == nil
+                    {
+                        let JSONError = response.result.error
+                        let JSON = response.result.value
+                        completionHandler(JSON as AnyObject, JSONError as NSError?)
+                    }
+                    else
+                    {
+                        let JSON = response.result.value! as! NSDictionary
+                        let JSONError = response.result.error
+                        completionHandler(JSON as AnyObject, JSONError as NSError?)
+                    }
+                }
+                else
+                {
+                    showAlert(popUpMessage.someWrong.rawValue)
+                }
+            }
+        }
+        else
+        {
+            showAlert(popUpMessage.someWrong.rawValue)
+        }
+    }
     
     //MARK: Stop All Services
     
@@ -88,6 +130,19 @@ class GlobalMethods: NSObject {
         }
         
         UserDefaults.standard.synchronize()
+    }
+    
+    func imageIsNull(imageName : UIImage)-> Bool
+    {
+        let size = CGSize(width: 0, height: 0)
+        if (imageName.size.width == size.width)
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
     }
     
     func setUserDefault(ObjectToSave : AnyObject?  , KeyToSave : String)
@@ -117,7 +172,7 @@ class GlobalMethods: NSObject {
         }
         return nil
     }
-
+    
     func getDecodeUserDefaultDictionaryValue(KeyToReturnValye : String) -> NSDictionary?
     {
         let defaults = UserDefaults.standard
@@ -229,15 +284,7 @@ class GlobalMethods: NSObject {
         
         return isReachable && !needsConnection
     }
-    
-    
-    
-    func alertNoInternetConnection()
-    {
-        SVProgressHUD.dismiss()
-        let topController = UIApplication.topViewController()
-        self.ShowAlertDisplay(titleObj: "Internet Connection", messageObj: "No Internet Connection", viewcontrolelr: topController!)
-    }
+
     
 }
 

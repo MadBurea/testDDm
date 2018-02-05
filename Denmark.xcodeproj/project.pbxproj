@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		349ED9D2202463C40009E1A3 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349ED9D1202463C40009E1A3 /* WebServices.swift */; };
 		349ED9D62024684D0009E1A3 /* HRToast+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349ED9D52024684C0009E1A3 /* HRToast+UIView.swift */; };
+		34DF424020283460009488D5 /* AllModalClassResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF423F2028345C009488D5 /* AllModalClassResponse.swift */; };
 		4F0FD3722008CF9E00D62A96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0FD3712008CF9E00D62A96 /* AppDelegate.swift */; };
 		4F0FD3742008CF9E00D62A96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0FD3732008CF9E00D62A96 /* ViewController.swift */; };
 		4F0FD3772008CF9E00D62A96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F0FD3752008CF9E00D62A96 /* Main.storyboard */; };
@@ -91,6 +92,7 @@
 		0F72CE1328ABC1346DE58785 /* Pods_Denmark.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Denmark.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		349ED9D1202463C40009E1A3 /* WebServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		349ED9D52024684C0009E1A3 /* HRToast+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HRToast+UIView.swift"; sourceTree = "<group>"; };
+		34DF423F2028345C009488D5 /* AllModalClassResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllModalClassResponse.swift; sourceTree = "<group>"; };
 		4F0FD36E2008CF9E00D62A96 /* Denmark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Denmark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0FD3712008CF9E00D62A96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F0FD3732008CF9E00D62A96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +192,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		34DF424120283CAA009488D5 /* ModelClass */ = {
+			isa = PBXGroup;
+			children = (
+				34DF423F2028345C009488D5 /* AllModalClassResponse.swift */,
+				349ED9D1202463C40009E1A3 /* WebServices.swift */,
+			);
+			path = ModelClass;
+			sourceTree = "<group>";
+		};
 		4F0FD3652008CF9E00D62A96 = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +227,7 @@
 				C5E9C2EE202092EA0007EEF7 /* NavigationController */,
 				4F9D02B1200E063700802F17 /* View Controllers */,
 				4F9D02AC200DFD0600802F17 /* HelperClass */,
+				34DF424120283CAA009488D5 /* ModelClass */,
 				4F0FD3712008CF9E00D62A96 /* AppDelegate.swift */,
 				4F0FD3782008CF9E00D62A96 /* Assets.xcassets */,
 				4F0FD37A2008CF9E00D62A96 /* LaunchScreen.storyboard */,
@@ -231,7 +243,6 @@
 				349ED9D52024684C0009E1A3 /* HRToast+UIView.swift */,
 				4F9D02AF200E016B00802F17 /* DN_StringFile.swift */,
 				4F226E062010C3B00057B568 /* DN_Extention.swift */,
-				349ED9D1202463C40009E1A3 /* WebServices.swift */,
 				4F77F5662010D45700EE0A56 /* GlobalMethods.swift */,
 			);
 			path = HelperClass;
@@ -453,7 +464,9 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Denmark/Pods-Denmark-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireJsonToObjects/AlamofireJsonToObjects.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/EVReflection/EVReflection.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
@@ -461,14 +474,16 @@
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
 				"${BUILT_PRODUCTS_DIR}/IGListKit/IGListKit.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireJsonToObjects.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EVReflection.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
@@ -476,7 +491,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
@@ -573,6 +588,7 @@
 				C5E9C287202061420007EEF7 /* PaymentOptionVC.swift in Sources */,
 				C5E9C2E620208F400007EEF7 /* LDView.swift in Sources */,
 				C5E9C2E120208F400007EEF7 /* LDImageView.swift in Sources */,
+				34DF424020283460009488D5 /* AllModalClassResponse.swift in Sources */,
 				C552FD9C2022FD3200E1F4BF /* ServiceItemCell.swift in Sources */,
 				C5E9C2D020208F400007EEF7 /* Int+Extension.swift in Sources */,
 				C552FD982022F4F700E1F4BF /* AwaitServicesVC.swift in Sources */,

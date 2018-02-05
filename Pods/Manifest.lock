@@ -1,11 +1,17 @@
 PODS:
   - Alamofire (4.6.0)
+  - AlamofireJsonToObjects (2.4.1):
+    - Alamofire
+    - EVReflection
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
+  - EVReflection (5.5.2):
+    - EVReflection/Core (= 5.5.2)
+  - EVReflection/Core (5.5.2)
   - FacebookCore (0.3.0):
     - Bolts (~> 1.8)
     - FBSDKCoreKit (~> 4.27)
@@ -40,14 +46,14 @@ PODS:
   - IGListKit/Default (3.1.1):
     - IGListKit/Diffing
   - IGListKit/Diffing (3.1.1)
-  - IQKeyboardManagerSwift (5.0.7)
+  - IQKeyboardManager (5.0.7)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - SVProgressHUD (2.2.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.4)
+  - AlamofireJsonToObjects
   - FacebookCore
   - FacebookLogin
   - FacebookShare
@@ -55,13 +61,15 @@ DEPENDENCIES:
   - GooglePlacePicker
   - GooglePlaces
   - IGListKit
-  - IQKeyboardManagerSwift
+  - IQKeyboardManager
   - SDWebImage (~> 3.8)
   - SVProgressHUD
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  AlamofireJsonToObjects: 2f652417f69ca86f229b704cdd00370bb892af45
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  EVReflection: d41e17998e6fe326bef86b836e980a8010afa5e4
   FacebookCore: 3ffa190a3f1f96cec0e44d3fc221bc322c595ffa
   FacebookLogin: 0af839ea858faef99550d16596b87b4a8e8906e6
   FacebookShare: 0469964297ebd75f052be2c5083389a4208e82b7
@@ -72,10 +80,10 @@ SPEC CHECKSUMS:
   GooglePlacePicker: 1573e644ab54564d95c2643edc0f29091609e966
   GooglePlaces: dd70d9d71ea1c7944846afe67de3712c99b30a77
   IGListKit: cb97f405ae43e59fe1da74271e19427ec20d3c07
-  IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
+  IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
 
-PODFILE CHECKSUM: 75336f3cfb4a69259cd501d31e28504eeef629f2
+PODFILE CHECKSUM: 14783cf6fb43df1ca7a1dd8f3d1318e6cabab155
 
 COCOAPODS: 1.3.1

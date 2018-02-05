@@ -11,7 +11,7 @@ import FacebookLogin
 import FacebookCore
 import SVProgressHUD
 
-class LoginVC: UIViewController,UITextFieldDelegate {
+class LoginVC: UIViewController {
 
     @IBOutlet weak var lblWelcome: UILabel!
     
@@ -35,6 +35,17 @@ class LoginVC: UIViewController,UITextFieldDelegate {
         // Do any additional setup after loading the view.
         
         self.setUpScreen()
+        
+        if let userDetail = UserDefaults.standard.object(forKey: kLoginUser) as? Data {
+            LoginUserModal = UserLogin(data: userDetail)
+            
+//            print("Login data is",LoginUserModal.status)
+//            print("Login data is",LoginUserModal.message)
+//            print("Login data is",LoginUserModal.data)
+//            print("Login data is",LoginUserModal.data[0].image_orginial_url)
+//            print("Login data is",LoginUserModal.data[0].image_thumb_url)
+
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,27 +53,8 @@ class LoginVC: UIViewController,UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: - UITextField Method
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
-        if txtEmail == textField {
-            textField.resignFirstResponder()
-            txtPassword.becomeFirstResponder()
-        }
-        else{
-            textField.resignFirstResponder()
-        }
-        return true
-    }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if txtEmail.isFirstResponder {
-            if (txtEmail.textInputMode?.primaryLanguage == "emoji") || !((txtEmail.textInputMode?.primaryLanguage) != nil) {
-                    return false
-                }
-        }
-        return true
-    }
+    
     //MARK: - UIView Method
     func setUpScreen()
     {
@@ -110,16 +102,14 @@ class LoginVC: UIViewController,UITextFieldDelegate {
             switch LoginResult {
                 
             case .failed(let error):
-                
+               
                 print(error.localizedDescription)
-                // self.showAlertWith(message: "An error occured. Plese try later.")
-                
+                showAlert("An error occured. Plese try later.")
+
             case .cancelled:
-                print("User cancelled facebook login.")
-                
+                showAlert("User cancelled facebook login.")
+
             case .success:
-                
-                // self.showHud()
                 
                 self.getUserrInfo(completion: { (userInfo, error) in
                     
@@ -130,14 +120,29 @@ class LoginVC: UIViewController,UITextFieldDelegate {
                     else {
                         print("userInfo",userInfo!)
                         
-                        if let userInfo = userInfo, let name = userInfo["name"], let userId = userInfo["id"], let email = userInfo["email"] , let gender = userInfo["gender"] {
-                            print("\nid",userId)
-                            print("name",name)
-                            print("email",email)
-                            print("gender",gender)
+                         let signupObj = self.storyboard?.instantiateViewController(withIdentifier: "EmployeeRegVC") as! EmployeeRegVC
+                        
+                        if let userInfo = userInfo, let name = userInfo["name"], let userId = userInfo["id"], let email = userInfo["email"] , let _ = userInfo["gender"] {
+                            
+                            signupObj.facebook_Id = "\(userId)"
+                            signupObj.facebook_Token = AccessToken.current!.authenticationToken
+                            signupObj.is_verified = "1"
+                            signupObj.socialProvider = "2"
+                            signupObj.UserName = "\(name)"
+                            signupObj.UserEmail = "\(email)"
+                            
+                            if let imageURL = ((userInfo["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
+                                //Download image from imageURL
+                                signupObj.UserImageURL = imageURL
+                            }
+                            
+                            self.navigationController?.pushViewController(signupObj, animated: true)
                         }
                         
                         print("FB token :- ",AccessToken.current!.authenticationToken)
+                        
+                        
+                       
                         
                     }
                 })
@@ -154,30 +159,17 @@ class LoginVC: UIViewController,UITextFieldDelegate {
     
     @IBAction func btnLoginAct(_ sender: Any)
     {
+        /*
         if userType == .employee, let controller = mainStory.instantiateViewController(withIdentifier: "NavEmployeeVC") as? NavEmployeeVC {
             appDelegate.window?.rootViewController = controller
         }
         else if userType == .employer, let controller = mainStory.instantiateViewController(withIdentifier: "NavEmployerVC") as? NavEmployerVC {
             appDelegate.window?.rootViewController = controller
         }
-        /*
-        if (txtEmail.text?.isBlank)!
-        {
-            SVProgressHUD.showError(withStatus: kEmailReqMsg)
+ */
+        if validation() {
+            self.LoginWithParameter()
         }
-        else if !(txtEmail.text?.isEmail)!
-        {
-            SVProgressHUD.showError(withStatus: kInvalidEmailMsg)
-        }
-        else if (txtPassword.text?.isBlank)!
-        {
-            SVProgressHUD.showError(withStatus: kPassReqMsg)
-        }
-        else
-        {
-            loginApi()
-        }
-         */
     }
     
     @IBAction func btnSignupAct(_ sender: Any)
@@ -185,50 +177,52 @@ class LoginVC: UIViewController,UITextFieldDelegate {
         let signupObj = self.storyboard?.instantiateViewController(withIdentifier: "EmployeeRegVC") as! EmployeeRegVC
         self.navigationController?.pushViewController(signupObj, animated: true)
     }
-    //MARK: - Web Services Call
-    func loginApi()
+}
+
+
+extension LoginVC: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
-        self.view.endEditing(true)
-        SVProgressHUD.show()
-        
-        //print("FCM TOKEN : ",appdel.fcmToken)
-        
-        let global = GlobalMethods()
-        let param =  ["email":"\(txtEmail.text!)","device_type":"1","push_token":"1","device_id":"12","password":"\(txtPassword.text!)"] as [String : Any]
-        
-        print("Sign In Parameter : ",param)
-        
-        global.callWebService(apiUrl: APIPath.login.rawValue, parameter: param as AnyObject!) { (Response:AnyObject, error:NSError?) in
-            
-            if error != nil
-            {
-                SVProgressHUD.showInfo(withStatus: kPleaseTryAgainMsg)
+        if txtEmail == textField {
+            textField.resignFirstResponder()
+            txtPassword.becomeFirstResponder()
+        }
+        else{
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if txtEmail.isFirstResponder {
+            if (txtEmail.textInputMode?.primaryLanguage == "emoji") || !((txtEmail.textInputMode?.primaryLanguage) != nil) {
+                return false
             }
-            else
-            {
-                
-                let dictResponse = Response as! NSDictionary
-                print(dictResponse)
-                let status = dictResponse.object(forKey: "status") as! String
-                
-                if Int(status) == 1
-                {
-                    
-                    DispatchQueue.main.async(execute: {() -> Void in
-                        
-                        SVProgressHUD.showSuccess(withStatus: dictResponse.object(forKey: "message") as? String)
-                    })
-                    
-                    let dataDict = dictResponse.object(forKey: "data") as! NSDictionary
-                    
-                    print(dataDict)
-                    
-                }
-                else
-                {
-                      SVProgressHUD.showInfo(withStatus: dictResponse.object(forKey: "message") as! String!)
-                }
-            }
+        }
+        return true
+    }
+    
+    func validation() -> Bool
+    {
+        if txtEmail.text?.trim.length == 0 {
+            showAlert(popUpMessage.emptyEmail.rawValue)
+            return false
+        }
+        else if txtEmail.text!.trim.length < 3 || txtEmail.text!.trim.length > 255 {
+            showAlert(popUpMessage.UserEmailValid.rawValue)
+            return false
+        }
+        else if !(txtEmail.text?.isEmail)!
+        {
+            showAlert(popUpMessage.UserEmailValid.rawValue)
+            return false
+        }
+        else if txtPassword.text?.trim.length == 0 {
+            showAlert(popUpMessage.emptyPassword.rawValue)
+            return false
+        }
+        else{
+            return true
         }
     }
 }

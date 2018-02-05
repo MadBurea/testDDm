@@ -6,11 +6,11 @@ target 'Denmark' do
   use_frameworks!
 
   # Pods for Denmark
-	pod 'IQKeyboardManagerSwift'
+	pod 'IQKeyboardManager'
 	pod 'FacebookCore'
 	pod 'FacebookLogin'
 	pod 'FacebookShare'
-	pod 'Alamofire', '~> 4.4'
+	pod 'AlamofireJsonToObjects'
   	pod 'SDWebImage', '~>3.8'
   	pod 'SVProgressHUD'
 	pod 'GooglePlaces'

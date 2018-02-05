@@ -26,6 +26,7 @@ let IS_IPHONE_6 = IS_IPHONE && SCREEN_MAX_LENGTH == 667.0
 let IS_IPHONE_6P = IS_IPHONE && SCREEN_MAX_LENGTH == 736.0
 
 
+
 typealias TimerTickClosure = (Timer)->Void
 typealias TimerTickBlock = @convention(block) (Timer)->Void
 typealias stringBlock = (String)->()
