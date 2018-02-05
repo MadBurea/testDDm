@@ -17,7 +17,7 @@ enum APIPath : String
     case login = "login"
     case registration = "registration"
     case getjobcategory = "getjobcategory"
-
+    case loginwithfacebook = "loginwithfacebook"
 }
 
 class GlobalMethods: NSObject {

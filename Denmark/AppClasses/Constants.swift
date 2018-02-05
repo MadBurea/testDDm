@@ -20,6 +20,7 @@ let global = GlobalMethods()
 var userCategory = EmployeeCategory()
 var userModel = UserModal()
 var LoginUserModal = UserLogin()
+var LoginFacebookUserModal = UserFacebookLogin()
 
 let themeColor = UIColor(red: 84.0/255.0, green: 183.0/255.0, blue: 183.0/255.0, alpha: 1.0)
 enum UserType {

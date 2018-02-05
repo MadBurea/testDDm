@@ -28,6 +28,14 @@ class LoginVC: UIViewController {
     @IBOutlet weak var btnLogin: UIButton!
     
     var isFromEmployee: Bool!
+    var facebook_Id = ""
+    var facebook_Token = ""
+    var is_verified = ""
+    var socialProvider = ""
+    var UserName = ""
+    var UserEmail = ""
+    var UserImageURL = ""
+
     
     //MARK: - UIView Life Cycle
     override func viewDidLoad() {
@@ -120,23 +128,25 @@ class LoginVC: UIViewController {
                     else {
                         print("userInfo",userInfo!)
                         
-                         let signupObj = self.storyboard?.instantiateViewController(withIdentifier: "EmployeeRegVC") as! EmployeeRegVC
-                        
                         if let userInfo = userInfo, let name = userInfo["name"], let userId = userInfo["id"], let email = userInfo["email"] , let _ = userInfo["gender"] {
                             
-                            signupObj.facebook_Id = "\(userId)"
-                            signupObj.facebook_Token = AccessToken.current!.authenticationToken
-                            signupObj.is_verified = "1"
-                            signupObj.socialProvider = "2"
-                            signupObj.UserName = "\(name)"
-                            signupObj.UserEmail = "\(email)"
+                            self.facebook_Id = "\(userId)"
+                            self.facebook_Token = AccessToken.current!.authenticationToken
+                            self.facebook_Token = AccessToken.current!.authenticationToken
+                            self.is_verified = "2"
+                            self.socialProvider = "2"
+                            self.UserName = "\(name)"
+                            self.UserEmail = "\(email)"
+
                             
                             if let imageURL = ((userInfo["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
                                 //Download image from imageURL
-                                signupObj.UserImageURL = imageURL
+                                self.UserImageURL = imageURL
+
                             }
                             
-                            self.navigationController?.pushViewController(signupObj, animated: true)
+                            self.LoginWithfacebook()
+                           
                         }
                         
                         print("FB token :- ",AccessToken.current!.authenticationToken)

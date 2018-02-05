@@ -90,8 +90,23 @@ class UserLogin: EVNetworkingObject {
         defaults.synchronize()
     }
 }
-class UserLoginData: EVNetworkingObject {
+
+
+class UserFacebookLogin: EVNetworkingObject {
+    var status = ""
+    var message = ""
+    var is_registered = ""
+
+    var data = [UserLoginData]()
     
+    class func clearUser() {
+        let defaults: UserDefaults = UserDefaults.standard
+        defaults.removeObject(forKey: kLoginUser)
+        defaults.synchronize()
+    }
+}
+
+class UserLoginData: EVNetworkingObject {
     var role_id = ""
     var name = ""
     var email = ""

@@ -134,6 +134,62 @@ extension EmployeeRegVC {
 
 extension LoginVC {
     
+    func LoginWithfacebook()  {
+
+        if checkInternet() == false {
+            showAlert(popUpMessage.someWrong.rawValue)
+            return
+        }
+        view.endEditing(true)
+        
+        SVProgressHUD.show()
+        
+        let param =  ["facebook_id":self.facebook_Id,"facebook_token":self.facebook_Token,"email":self.UserEmail] as [String : Any]
+        
+        let strAPIPath = GlobalMethods.WEB_SERVICE_BASE_URL + APIPath.loginwithfacebook.rawValue
+        
+        
+        Alamofire.request(strAPIPath,method:.post , parameters: param as? Parameters, headers: nil)
+            .responseObject { (response: DataResponse<UserFacebookLogin>) in
+                
+                SVProgressHUD.dismiss()
+                
+                if response.result.value != nil {
+                    
+                    let responseValue = response.result.value
+                    LoginFacebookUserModal = responseValue!
+                    
+                    showAlert(LoginFacebookUserModal.message)
+                    
+                    if LoginFacebookUserModal.status == "1"  &&  LoginFacebookUserModal.is_registered == "1"{
+                        let userDict = responseValue!.toJsonData()
+                        global.setUserDefault(ObjectToSave: userDict as AnyObject, KeyToSave: kLoginUser)
+                    }else{
+                        
+                        let signupObj = self.storyboard?.instantiateViewController(withIdentifier: "EmployeeRegVC") as! EmployeeRegVC
+                        signupObj.facebook_Id = self.facebook_Id
+                        signupObj.facebook_Token = self.facebook_Token
+                        signupObj.is_verified = self.is_verified
+                        signupObj.socialProvider = self.socialProvider
+                        signupObj.UserName = self.UserName
+                        signupObj.UserEmail = self.UserEmail
+                        self.navigationController?.pushViewController(signupObj, animated: true)
+                    }
+                }
+            }
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    break
+                case .failure(let error):
+                    SVProgressHUD.dismiss()
+                    showAlert(error.localizedDescription)
+                    break
+                }
+        }
+        
+    }
+    
     func LoginWithParameter()  {
         
         if checkInternet() == false {
